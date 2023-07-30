@@ -15,6 +15,11 @@ const dateFormat=moment(date).format('DD/MM/YYYY');
 input.value='';
 calendar.value="";
 
+//En caso que no ingresen nada, no se agregan las tareas
+if(value=='' || date=='')
+{
+    return;
+}
 const taskObj={
     value,
     dateFormat
