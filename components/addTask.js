@@ -1,29 +1,37 @@
-const add_task = (evento) => {
-    const list=document.querySelector('[data-list]');
-    const task = createTask_add(evento);
-    list.appendChild(task);
-}
+import check_completed from "./CheckCompleted.js";
+import deleteIcon from "./deleteIcon.js";
 
-const tasks_list=[];
+export const add_task = (evento) => {
 
-const createTask_add = (evento) => {
 evento.preventDefault();
+const list=document.querySelector('[data-list]');
 const input = document.querySelector('[data-form-input]');
 const calendar=document.querySelector("[data-form-date]");
+
 const value=input.value;
 const date=calendar.value;
 const dateFormat=moment(date).format('DD/MM/YYYY');
+
+input.value='';
+calendar.value="";
 
 const taskObj={
     value,
     dateFormat
 };
 
-tasks_list.push(taskObj);
-localStorage.setItem("tasks",JSON.stringify(tasks_list));
+const tasks_list= JSON.parse(localStorage.getItem("tasks")) || []; /*Si no hay nada guardado todavia, entonces inicializamos lista*/
+    tasks_list.push(taskObj);
+    localStorage.setItem("tasks",JSON.stringify(tasks_list));
+
+const task = createTask_add(taskObj);
+    list.appendChild(task);
+}
+
+export const createTask_add = ({value,dateFormat}) => {
 
 const task=document.createElement('li');
-task.classList.add('card');
+    task.classList.add('card');
 
 const taskContent=document.createElement('div');
 const titleTask=document.createElement('span');
@@ -38,9 +46,6 @@ dateElement.innerHTML=dateFormat;
 task.appendChild(taskContent);
 task.appendChild(dateElement);
 task.appendChild(deleteIcon());
-input.value='';
 
 return task;
 }
-
-export default add_task;

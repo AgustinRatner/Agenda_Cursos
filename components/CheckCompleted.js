@@ -9,9 +9,9 @@ const check_completed = () => {
 de lo contrario le agrega la clase. Entonces al seleccionar la primera vez se marca, la segunda se desmarca.*/
 const complete_task = (event) => {
     const element = event.target;
-    element.classList.toggle('fas');
-    element.classList.toggle('completeIcon');
-    element.classList.toggle('far');
+        element.classList.toggle('fas');
+        element.classList.toggle('completeIcon');
+        element.classList.toggle('far');
 }
 
 export default check_completed;
