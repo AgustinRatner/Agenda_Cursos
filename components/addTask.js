@@ -1,5 +1,6 @@
 import check_completed from "./CheckCompleted.js";
 import deleteIcon from "./deleteIcon.js";
+import {displayTasks} from "./readTasks.js";
 
 export const add_task = (evento) => {
 
@@ -25,12 +26,12 @@ const taskObj={
     dateFormat
 };
 
+
 const tasks_list= JSON.parse(localStorage.getItem("tasks")) || []; /*Si no hay nada guardado todavia, entonces inicializamos lista*/
     tasks_list.push(taskObj);
     localStorage.setItem("tasks",JSON.stringify(tasks_list));
-
-const task = createTask_add(taskObj);
-    list.appendChild(task);
+    
+    displayTasks();
 }
 
 export const createTask_add = ({value,dateFormat}) => {
